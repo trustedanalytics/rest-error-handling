@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.trustedanalytics</groupId>
         <artifactId>trustedanalytics-cloud-parent</artifactId>
-        <version>0.4.3</version>
+        <version>0.4.5</version>
     </parent>
     <artifactId>rest-error-handling</artifactId>
     <version>0.0.1-SNAPSHOT</version>
