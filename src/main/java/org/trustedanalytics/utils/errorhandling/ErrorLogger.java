@@ -17,8 +17,11 @@ package org.trustedanalytics.utils.errorhandling;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import javax.servlet.http.HttpServletResponse;
 
 public class ErrorLogger {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -29,5 +32,17 @@ public class ErrorLogger {
 
     public static void logError(Logger logger, String message, Throwable e) {
         logger.error(message, e);
+    }
+
+    public static void logAndSendErrorResponse(Logger logger, HttpServletResponse response, HttpStatus status, Exception ex) throws IOException {
+        logAndSendErrorResponse(logger, response, status, status.getReasonPhrase(), ex);
+    }
+
+    public static void logAndSendErrorResponse(Logger logger, HttpServletResponse response, HttpStatus status, String reason, Exception ex) throws IOException {
+        long errorId = ErrorIdGenerator.getNewId();
+        String errorMessage = ErrorFormatter.formatErrorMessage(reason, errorId);
+
+        logger.error(errorMessage, ex);
+        response.sendError(status.value(), errorMessage);
     }
 }

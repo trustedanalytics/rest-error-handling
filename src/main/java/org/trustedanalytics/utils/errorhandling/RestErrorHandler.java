@@ -33,7 +33,7 @@ public class RestErrorHandler {
     @ExceptionHandler(Exception.class)
     public void handleException(Exception e, HttpServletResponse response) throws Exception {
         // Generate error reference id (to be used both in logs and in error sent from the service)
-        long errorId = new Date().getTime();
+        long errorId = ErrorIdGenerator.getNewId();
 
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it - like the OrderNotFoundException example

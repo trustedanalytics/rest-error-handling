@@ -25,6 +25,9 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ErrorLoggerTest {
@@ -41,5 +44,27 @@ public class ErrorLoggerTest {
         verify(logger, times(1)).error(capturedMessage.capture(), capturedEx.capture());
         Assert.assertEquals("Some message", capturedMessage.getValue());
         Assert.assertEquals("Some ex", capturedEx.getValue().getMessage());
+    }
+
+    @Test
+    public void logAndSendErrorResponseIsUsingGivenLoggerAndResponse() throws Exception {
+        Logger logger = mock(Logger.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        Exception ex1 = new Exception("Some ex");
+        ArgumentCaptor<String> capturedMessage = ArgumentCaptor.forClass(String.class);
+        ArgumentCaptor<Throwable> capturedEx = ArgumentCaptor.forClass(Throwable.class);
+        ArgumentCaptor<Integer> capturedStatus = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<String> capturedReason = ArgumentCaptor.forClass(String.class);
+
+        ErrorLogger.logAndSendErrorResponse(logger, response, HttpStatus.BAD_REQUEST, ex1);
+
+        verify(logger, times(1)).error(capturedMessage.capture(), capturedEx.capture());
+        Assert.assertTrue(capturedMessage.getValue().contains(HttpStatus.BAD_REQUEST.getReasonPhrase()));
+        Assert.assertEquals("Some ex", capturedEx.getValue().getMessage());
+
+        verify(response, times(1)).sendError(capturedStatus.capture(), capturedReason.capture());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), capturedStatus.getValue().intValue());
+        Assert.assertTrue(capturedReason.getValue().contains(HttpStatus.BAD_REQUEST.getReasonPhrase()));
     }
 }
