@@ -7,7 +7,7 @@
         <version>0.4.5</version>
     </parent>
     <artifactId>rest-error-handling</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <properties>
         <spring-version>4.1.6.RELEASE</spring-version>
         <jersey-server-version>1.9</jersey-server-version>
@@ -55,4 +55,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+  <scm>
+    <tag>org.trustedanalytics.rest-error-handling-0.0.2</tag>
+  </scm>
 </project>
