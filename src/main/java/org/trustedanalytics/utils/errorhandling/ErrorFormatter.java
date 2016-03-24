@@ -25,4 +25,10 @@ public class ErrorFormatter {
     public static String formatErrorMessage(HttpStatus httpStatus, long errorId) {
         return formatErrorMessage(httpStatus.getReasonPhrase(), errorId);
     }
+
+    /**
+     * Private constructor in order to prevent to instantiate this class.
+     */
+    private ErrorFormatter() {
+    }
 }

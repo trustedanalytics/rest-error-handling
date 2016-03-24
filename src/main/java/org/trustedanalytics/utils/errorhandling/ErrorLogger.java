@@ -45,4 +45,10 @@ public class ErrorLogger {
         logger.error(errorMessage, ex);
         response.sendError(status.value(), errorMessage);
     }
+
+    /**
+     * Private constructor in order to prevent to instantiate this class.
+     */
+    private ErrorLogger() {
+    }
 }
