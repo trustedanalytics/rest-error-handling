@@ -18,13 +18,13 @@ package org.trustedanalytics.utils.errorhandling;
 import java.util.Date;
 
 public class ErrorIdGenerator {
-    public static long getNewId() {
-        return new Date().getTime();
-    }
-
     /**
      * Private constructor in order to prevent to instantiate this class.
      */
     private ErrorIdGenerator() {
+    }
+
+    public static long getNewId() {
+        return new Date().getTime();
     }
 }

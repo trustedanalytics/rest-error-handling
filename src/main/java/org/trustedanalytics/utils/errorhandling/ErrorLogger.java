@@ -26,6 +26,12 @@ import javax.servlet.http.HttpServletResponse;
 public class ErrorLogger {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    /**
+     * Private constructor in order to prevent to instantiate this class.
+     */
+    private ErrorLogger() {
+    }
+
     public static void logError(String message, Throwable e) {
         logError(LOGGER, message, e);
     }
@@ -44,11 +50,5 @@ public class ErrorLogger {
 
         logger.error(errorMessage, ex);
         response.sendError(status.value(), errorMessage);
-    }
-
-    /**
-     * Private constructor in order to prevent to instantiate this class.
-     */
-    private ErrorLogger() {
     }
 }

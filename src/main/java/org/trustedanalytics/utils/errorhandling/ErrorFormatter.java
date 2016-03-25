@@ -18,17 +18,17 @@ package org.trustedanalytics.utils.errorhandling;
 import org.springframework.http.HttpStatus;
 
 public class ErrorFormatter {
+    /**
+     * Private constructor in order to prevent to instantiate this class.
+     */
+    private ErrorFormatter() {
+    }
+
     public static String formatErrorMessage(String errorMessage, long errorId) {
         return String.format("%s (error reference: %d)", errorMessage, errorId);
     }
 
     public static String formatErrorMessage(HttpStatus httpStatus, long errorId) {
         return formatErrorMessage(httpStatus.getReasonPhrase(), errorId);
-    }
-
-    /**
-     * Private constructor in order to prevent to instantiate this class.
-     */
-    private ErrorFormatter() {
     }
 }
