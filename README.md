@@ -1,3 +1,5 @@
+[![Dependency Status](https://www.versioneye.com/user/projects/57236fbfba37ce00350af83d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57236fbfba37ce00350af83d)
+
 # rest-error-handling
 A common Java library for REST Controller error handling and logging
 
