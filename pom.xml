@@ -4,10 +4,10 @@
     <parent>
         <groupId>org.trustedanalytics</groupId>
         <artifactId>trustedanalytics-cloud-parent</artifactId>
-        <version>0.5.7</version>
+        <version>0.6.1</version>
     </parent>
     <artifactId>rest-error-handling</artifactId>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <properties>
         <spring-version>4.1.6.RELEASE</spring-version>
         <jersey-server-version>1.9</jersey-server-version>
